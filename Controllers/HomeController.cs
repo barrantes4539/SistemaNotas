@@ -30,5 +30,19 @@ namespace SistemaNotas.Controllers
         {
             return View();
         }
+
+        public ActionResult VerEstudiantes()
+        {
+            return View();
+        }
+
+        public ActionResult VerMateriasEstudiantes()
+        {
+            return View();
+        }
+        public ActionResult ModificarNotas()
+        {
+            return View();
+        }
     }
 }
