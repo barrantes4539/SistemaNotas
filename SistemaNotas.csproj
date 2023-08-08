@@ -127,7 +127,12 @@
     <Compile Include="Models\BD\CD_Estudiante.cs" />
     <Compile Include="Models\BD\CD_Profesor.cs" />
     <Compile Include="Models\Conexion.cs" />
-    <Compile Include="Models\Entidades\Profesor.cs" />
+    <Compile Include="Models\Entidades\Estudiantes.cs" />
+    <Compile Include="Models\Entidades\Estudiante_ProfesorMateria.cs" />
+    <Compile Include="Models\Entidades\Materias.cs" />
+    <Compile Include="Models\Entidades\Profesores.cs" />
+    <Compile Include="Models\Entidades\ProfesorMateria.cs" />
+    <Compile Include="Models\Entidades\VistaNotas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

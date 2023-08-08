@@ -5,7 +5,11 @@ using System.Web;
 
 namespace SistemaNotas.Models.Entidades
 {
-    public class Profesor
+    public class ProfesorMateria
     {
+        int _idProfesorMateria;        
+        int _idMateria;
+        int _idProfesor;
+
     }
 }
