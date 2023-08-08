@@ -4,5 +4,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ModificarNotas</h2>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div class="row">
+            <h2>Modificar Nota</h2>
+
+        <form class="row">
+            <div class="col-md-12 mb-3">
+                <label for="Nombre" class="form-label">Estudiante</label>
+                <input type="text" class="form-control w-100" disabled id="Nombre" aria-describedby="Nombre del estudiante">
+            </div>
+            <div class="mb-3">
+                <label for="Nota" class="form-label">Nota</label>
+                <input type="number" class="form-control" id="Nota">
+            </div>
+
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Estado...</option>
+                    <option value="1">Aprobado</option>
+                    <option value="2">En curso</option>
+                    <option value="3">Reprobado</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+        </form>
+
+    </div>
+</div>
+
+
 
