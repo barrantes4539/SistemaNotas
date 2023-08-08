@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Inicio de Sesión</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/styleAuth.css" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+    <form class="formIS" method="post" action="@Url.Action("Login", "Acceso")">
+        <p class="titleIS">Inicio de Sesión </p>
+
+
+
+        <label>
+            <span>Correo</span>
+            <input required="" name="correo" placeholder="" type="email" class="input">
+        </label>
+
+        <label>
+            <span>Clave</span>
+            <input required="" name="password" placeholder="" type="password" class="input">
+        </label>
+
+        <button type="submit" class="submitIS">Iniciar sesión</button>
+        <p class="signinIS">¿No tiene una cuenta? <a href="@Url.Action("Registro", "Acceso")">Registrarme</a> </p>
+
+        <div id="errorDiv" class="error-message">
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+        </div>
+    </form>
+
+    <script src="../assets/js/main.js"></script>
+</body>
