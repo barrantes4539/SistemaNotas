@@ -9,6 +9,9 @@ namespace SistemaNotas.Models.BD
 {
     public class CD_Estudiante
     {
+<<<<<<< HEAD
+        
+=======
         //public object IniciarSesion(string correo, string contrasena)
         //{
         //    using (SqlConnection connection = new SqlConnection(Conexion.cn))
@@ -61,5 +64,6 @@ namespace SistemaNotas.Models.BD
         //        }
         //    }
         //}
+>>>>>>> ec40fc0d9538ae3b2374576cd53a8e1916aa526b
     }
 }
