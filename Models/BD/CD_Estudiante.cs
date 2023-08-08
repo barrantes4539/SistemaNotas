@@ -9,46 +9,56 @@ namespace SistemaNotas.Models.BD
 {
     public class CD_Estudiante
     {
-        //public List<AlertasBebe> VerAlertas(int idBebe)
+        //public object IniciarSesion(string correo, string contrasena)
         //{
-        //    SqlConnection connection = new SqlConnection();
-        //    try
+        //    using (SqlConnection connection = new SqlConnection(Conexion.cn))
         //    {
-        //        string connectionString = Conexion.cn;
-        //        connection = new SqlConnection(connectionString);
-        //        connection.Open();
-        //        SqlCommand command = new SqlCommand("spVerAlertas", connection);
-        //        command.CommandType = CommandType.StoredProcedure;
-        //        command.Parameters.AddWithValue("@idBebe", idBebe);
-        //        SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-        //        DataTable dataTable = new DataTable();
-        //        adapter.Fill(dataTable);
-
-        //        List<AlertasBebe> List = new List<AlertasBebe>();
-
-        //        foreach (DataRow row in dataTable.Rows)
+        //        try
         //        {
-        //            AlertasBebe Data = new AlertasBebe
+        //            connection.Open();
+
+        //            SqlCommand command = new SqlCommand("SistemaNotas.IniciarSesion", connection);
+        //            command.CommandType = CommandType.StoredProcedure;
+        //            command.Parameters.AddWithValue("@correo", correo);
+        //            command.Parameters.AddWithValue("@contrasena", contrasena);
+
+        //            SqlDataReader reader = command.ExecuteReader();
+
+        //            if (reader.HasRows)
         //            {
-        //                idAlerta = row["idAlerta"].ToString(),
-        //                Titulo = row["Titulo"].ToString(),
-        //                Hora = row["Hora"].ToString(),
-        //                idCategoria = row["idCategoria"].ToString(),
-        //                Estado = row["Estado"].ToString(),
-        //                // ...
-        //            };
-        //            List.Add(Data);
+        //                reader.Read(); // Assuming there's only one matching record
+
+        //                if (reader.FieldCount > 1) // If more than 1 field, it's a professor
+        //                {
+        //                    Profesor profesor = new Profesor
+        //                    {
+        //                        Id = Convert.ToInt32(reader["Id"]),
+        //                        Nombre = reader["Nombre"].ToString(),
+        //                        // Populate other properties...
+        //                    };
+        //                    return profesor;
+        //                }
+        //                else // Otherwise, it's a student
+        //                {
+        //                    Estudiante estudiante = new Estudiante
+        //                    {
+        //                        Id = Convert.ToInt32(reader["Id"]),
+        //                        Nombre = reader["Nombre"].ToString(),
+        //                        // Populate other properties...
+        //                    };
+        //                    return estudiante;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                return "0";
+        //            }
         //        }
-        //        return List;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return new List<AlertasBebe>();
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
+        //        catch (Exception)
+        //        {
+        //            // Handle exception appropriately
+        //            return "Error occurred during login.";
+        //        }
         //    }
         //}
     }
