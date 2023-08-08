@@ -26,5 +26,9 @@ namespace SistemaNotas.Controllers
 
             return View();
         }
+        public ActionResult VerMaterias()
+        {
+            return View();
+        }
     }
 }
