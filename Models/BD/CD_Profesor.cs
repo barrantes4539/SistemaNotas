@@ -70,24 +70,6 @@ namespace SistemaNotas.Models.BD
             }
         }
 
-        public static void ModificarNotaEstudiante(int idEstudianteProfesorMateria, double notaNueva)
-        {
-            try
-            {
-                string spName = "ModificarNota";
-                var lstParametros = new List<SqlParameter>()
-                {
-                    new SqlParameter("@idEstudianteProfesorMateria", idEstudianteProfesorMateria),
-                    new SqlParameter("@nuevaNota", notaNueva),
-                };
-                Conexion iConexion = new Conexion();
-                iConexion.ExecuteSP(spName, lstParametros);
-            }
-            catch (Exception)
-            {
-                throw new Exception("No se pudo modificar la nota del estudiante");
-            }
-        }
 
         public static Estudiante_ProfesorMateria ObtenerEstudiantePorId(int idEstudianteProfesorMateria)
         {
@@ -108,6 +90,7 @@ namespace SistemaNotas.Models.BD
                         Estudiante_ProfesorMateria estudiante = new Estudiante_ProfesorMateria
                         {
                             IdEstudiante = Convert.ToInt32(reader["idEstudiante"]),
+                            IdEstudianteProfesorMateria= Convert.ToInt32(reader["idEstudianteProfesorMateria"]),
                             Estado = reader["Estado"].ToString(),
                             Nota = Convert.ToInt32(reader["Nota"]),
                             // Otros campos del estudiante

@@ -75,6 +75,7 @@ namespace SistemaNotas.Controllers
                     Estudiante_ProfesorMateria estudiante = CD_Profesor.ObtenerEstudiantePorId(idEstudiante.Value);
 
                     ViewBag.IdEstudiante = estudiante.IdEstudiante;
+                    ViewBag.IdMateriaEstudiante = estudiante.IdEstudianteProfesorMateria;
                     ViewBag.Nota = estudiante.Nota;
                     ViewBag.Estado = estudiante.Estado;
                 }

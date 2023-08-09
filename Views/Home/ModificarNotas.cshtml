@@ -10,20 +10,25 @@
         <h2>Modificar Nota</h2>
 
         <form class="m-auto" id="modificar-nota-form">
+
+            <div class="mb-3">
+                <input type="text" hidden class="form-control" disabled id="materiaEstudiante" value="@ViewBag.IdMateriaEstudiante">
+            </div>
+
             <div class="mb-3">
                 <label for="EstudianteId" class="form-label">Estudiante</label>
                 <input type="text" class="form-control" disabled id="IdEstudiante" value="@ViewBag.IdEstudiante">
             </div>
             <div class="mb-3">
                 <label for="Nota" class="form-label">Nota</label>
-                <input type="number" class="form-control" id="Nota" value="@ViewBag.Nota" >
+                <input type="number" class="form-control" id="Nota" value="@ViewBag.Nota">
             </div>
 
             <div class="mb-3">
                 <label for="estado" class="form-label">Estado</label>
-                <select class="form-select" id="estado" aria-label="Default select example" >
+                <select class="form-select" id="estado" aria-label="Default select example">
                     <option selected>@ViewBag.Estado</option>
-                    <option value="Aprobado" >Aprobado</option>
+                    <option value="Aprobado">Aprobado</option>
                     <option value="En curso">En curso</option>
                     <option value="Reprobado">Reprobado</option>
                 </select>
@@ -44,7 +49,7 @@
 
         $("#modificar-nota-form").submit(function (e) {
             e.preventDefault(); // Evitar la acción de envío por defecto
-            var estudianteId = $("#IdEstudiante").val();
+            var estudianteId = $("#materiaEstudiante").val();
             var nuevaNota = $("#Nota").val();
             var nuevoEstado = $("#estado").val();
 
