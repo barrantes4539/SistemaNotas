@@ -24,6 +24,8 @@
                         <td>@nota.NombreEstudiante</td>
                         <td>@nota.Estado</td>
                         <td>@nota.Nota</td>
+                        <td>@Html.ActionLink("Modificar", "ModificarNotas", "Home", new { area = "" }, new { @class = "btn btn-primary" })</td>
+
                     </tr>
                 }
             </tbody>
