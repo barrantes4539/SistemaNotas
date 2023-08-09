@@ -20,11 +20,15 @@
             <tbody>
                 @foreach (var nota in Model)
                 {
-                    <tr>
+                    <tr id="estudiante-row-@nota.IdEstudianteProfesorMateria">
+                        
                         <td>@nota.NombreEstudiante</td>
                         <td>@nota.Estado</td>
                         <td>@nota.Nota</td>
-                        <td>@Html.ActionLink("Modificar", "ModificarNotas", "Home", new { area = "" }, new { @class = "btn btn-primary" })</td>
+                        <td>
+                            <!-- En tu vista anterior -->
+                            <a href="@Url.Action("ModificarNotas", "Home", new { idEstudiante = nota.IdEstudianteProfesorMateria })" class="btn btn-primary">Modificar</a>
+                        </td>
 
                     </tr>
                 }
@@ -32,3 +36,36 @@
         </table>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Manejar clic en fila del estudiante
+        $("tr[id^='estudiante-row']").click(function () {
+            var estudianteId = $(this).data("estudiante-id");
+            cargarDatosEstudiante(estudianteId);
+        });
+
+        // Manejar clic en enlace "Modificar"
+        $(".modificar-nota").click(function (e) {
+            e.stopPropagation(); // Evitar que el clic en el enlace propague al clic en la fila
+        });
+
+        function cargarDatosEstudiante(estudianteId) {
+            $.ajax({
+                url: '@Url.Action("CargarDatosEstudiante", "Home")', // Asegúrate de que esta ruta sea correcta
+                type: 'GET',
+                data: { id: estudianteId },
+                success: function (data) {
+                    debugger;
+                    $("#Nombre").val(data.NombreEstudiante);
+                    $("#Nota").val(data.Nota);
+                    $("#estado").val(data.Estado);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
+
