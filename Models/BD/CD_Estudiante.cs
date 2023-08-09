@@ -71,5 +71,43 @@ namespace SistemaNotas.Models.BD
             }
         }
 
+        public static List<Entidades.VistaNotas> CargarNotasEstudiante(int idEstudiante)
+        {
+            try
+            {
+                List<Entidades.VistaNotas> Notas = new List<Entidades.VistaNotas>();
+                string spName = "VerNotasEstudiante";
+                var lstParametros = new List<SqlParameter>()
+                {
+                    new SqlParameter("@idEstudiante", idEstudiante),
+                };
+                Conexion iConexion = new Conexion();
+                DataTable dtNotas = iConexion.ExecuteSPWithDT(spName, null);
+
+                if (dtNotas != null && dtNotas.Rows.Count > 0)
+                {
+                    foreach (DataRow fila in dtNotas.Rows)
+                    {
+                        Entidades.VistaNotas a = new Entidades.VistaNotas
+                        {
+                            Identificador = Convert.ToInt32(fila[0]),
+                            IdMateria = Convert.ToInt32(fila[1]),
+                            NombreMateria = fila[2].ToString(),
+                            NombreProfesor = fila[3].ToString() + " " + fila[4].ToString(),
+                            NombreEstudiante = fila[5].ToString() + " " + fila[6].ToString(),
+                            Estado = fila[7].ToString(),
+                            Nota = Convert.ToDouble(fila[8].ToString())
+                        };
+
+                        Notas.Add(a);
+                    }
+                }
+                return Notas;
+            }
+            catch (Exception)
+            {
+                throw new Exception("No se pudieron cargar las notas del estudiante");
+            }
+        }
     }
 }
