@@ -15,13 +15,13 @@ namespace SistemaNotas.Controllers
         {
             return View();
         }
-        public ActionResult InicioSesionApp()
+        public ActionResult LoginApp()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult InicioSesionApp(string correo, string password)
+        public ActionResult LoginApp(string correo, string password)
         {
             CD_Estudiante loginProcessor = new CD_Estudiante();
             object loginResult = loginProcessor.IniciarSesion(correo, password);
@@ -47,7 +47,7 @@ namespace SistemaNotas.Controllers
                 ViewBag.ErrorMessage = "Error al iniciar sesión.";
             }
 
-            return View("InicioSesionApp"); // Return back to the login view
+            return View("LoginApp"); // Return back to the login view
         }
     }
 }
