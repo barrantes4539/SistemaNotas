@@ -10,18 +10,30 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Sistema Notas", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Ver Materias", "VerMaterias", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Materias estudiantes", "VerMateriasEstudiantes", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Ver estudiantes", "VerEstudiantes", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Modificar Notas", "ModificarNotas", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Session["correoEstudiante"] != null)
+                    {
+                        <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Ver Materias", "VerMaterias", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+             
+
+                    }
+                    else if (Session["correoProfesor"] != null)
+                    {
+                        <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    
+                        <li>@Html.ActionLink("Materias estudiantes", "VerMateriasEstudiantes", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Ver estudiantes", "VerEstudiantes", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Modificar Notas", "ModificarNotas", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    }
+
                 </ul>
             </div>
         </div>
