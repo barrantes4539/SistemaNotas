@@ -30,12 +30,14 @@ namespace SistemaNotas.Controllers
             {
                 // Successfully logged in as a student
                 Session["correoEstudiante"] = estudiante.Correo; // Store student's email in session
+                Session["nombre"] = estudiante.Nombre;
                 return RedirectToAction("Index", "Home", new { id = estudiante.IdEstudiante });
             }
             else if (loginResult is Profesores profesor)
             {
                 // Successfully logged in as a professor
                 Session["correoProfesor"] = profesor.Correo; // Store professor's email in session
+                Session["nombre"] = profesor.Nombre;
                 return RedirectToAction("Index", "Home", new { id = profesor.IdProfesor });
             }
             else if (loginResult.ToString() == "0")
