@@ -49,6 +49,12 @@ namespace SistemaNotas.Controllers
 
             return View("LoginApp"); // Return back to the login view
         }
+
+        public ActionResult CerrarSesion()
+        {
+            Session.Clear();
+            return View("LoginApp");
+        }
     }
 }
     
