@@ -12,7 +12,14 @@ namespace SistemaNotas.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Session["correoProfesor"] != null || Session["correoEstudiante"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginApp", "AccesoApp");
+            }
         }
 
         public ActionResult About()
@@ -30,14 +37,28 @@ namespace SistemaNotas.Controllers
         }
         public ActionResult VerMaterias()
         {
-            List<VistaNotas> notas = CD_Estudiante.CargarNotasEstudiante(Convert.ToInt32(Session["idEstudiante"]));
-            return View(notas);
+            if (Session["correoEstudiante"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginApp", "AccesoApp");
+            }
         }
 
         public ActionResult VerEstudiantes()
         {
-            List<Estudiante_ProfesorMateria> estudiantes = CD_Profesor.CargarNotasEstudiante(Convert.ToInt32(Session["idProfesor"]));
-            return View(estudiantes);
+            if (Session["correoProfesor"] != null)
+            {
+                List<Estudiante_ProfesorMateria> estudiantes = CD_Profesor.CargarNotasEstudiante(Convert.ToInt32(Session["idProfesor"]));
+                return View(estudiantes);
+            }
+            else
+            {
+                return RedirectToAction("LoginApp", "AccesoApp");
+            }
+
         }
 
         public ActionResult VerMateriasEstudiantes()
@@ -46,7 +67,14 @@ namespace SistemaNotas.Controllers
         }
         public ActionResult ModificarNotas()
         {
-            return View();
+            if (Session["correoProfesor"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginApp", "AccesoApp");
+            }
         }
 
  
