@@ -1,39 +1,52 @@
-﻿
+﻿@model List<SistemaNotas.Models.Entidades.VistaNotas>
+
 @{
     ViewBag.Title = "VerMaterias";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Notas estudiante"] = "Mostrar notas";
 }
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link href="~/Content/Materias.css" rel="stylesheet" />
 
+
 <div class="container">
     <div class="row text-center container">
         <h1> Mis materias</h1>
-            <div class="card m-3 bg-success" style="width: 18rem;">
+        @foreach (var nota in Model)
+        {
+            <div class="card m-3 @GetCardColor(nota.Estado)" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Materia</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Nota: 10.0</h6>
-                    <p class="card-text">Estado: cursando</p>
+                    <h5 class="card-title">@nota.NombreMateria</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Nota: @nota.Nota</h6>
+                    <p class="card-text">Estado: @nota.Estado</p>
                 </div>
             </div>
+        }
 
-            <div class="card m-3 bg-danger" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Materia</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Nota: 10.0</h6>
-                    <p class="card-text">Estado: cursando</p>
-                </div>
-            </div>
+        @functions {
+            string GetCardColor(string estado)
+            {
+                if (estado == "En curso")
+                {
+                    return "bg-yellow";
+                }
+                else if (estado == "Aprobado")
+                {
+                    return "bg-success";
+                }
+                else if (estado == "Reprobado")
+                {
+                    return "bg-danger";
+                }
+                else
+                {
+                    return "bg-secondary";
+                }
+            }
+        }
 
-            <div class="card m-3 bg-yellow" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Materia</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Nota: 10.0</h6>
-                    <p class="card-text">Estado: cursando</p>
-                </div>
-            </div>
-        </div>
+    </div>
 
 </div>
 

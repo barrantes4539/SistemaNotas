@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SistemaNotas.Models.Entidades;
+using SistemaNotas.Models.BD;
 
 namespace SistemaNotas.Controllers
 {
@@ -28,7 +30,8 @@ namespace SistemaNotas.Controllers
         }
         public ActionResult VerMaterias()
         {
-            return View();
+            List<VistaNotas> notas = CD_Estudiante.CargarNotasEstudiante(Convert.ToInt32(Session["idEstudiante"]));
+            return View(notas);
         }
 
         public ActionResult VerEstudiantes()
