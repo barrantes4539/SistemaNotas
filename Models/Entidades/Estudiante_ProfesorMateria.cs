@@ -12,5 +12,11 @@ namespace SistemaNotas.Models.Entidades
         int _idEstudiante;
         string _estado;
         double _nota;
+
+        public int IdEstudianteProfesorMateria { get => _idEstudianteProfesorMateria; set => _idEstudianteProfesorMateria = value; }
+        public int IProfesorMateria { get => _iProfesorMateria; set => _iProfesorMateria = value; }
+        public int IdEstudiante { get => _idEstudiante; set => _idEstudiante = value; }
+        public string Estado { get => _estado; set => _estado = value; }
+        public double Nota { get => _nota; set => _nota = value; }
     }
 }

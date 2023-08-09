@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Inicio de Sesión</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+
+
+    <link href="../content/Login.css" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+    <form class="formIS" method="post" action="@Url.Action("LoginApp", "AccesoApp")">
+        <p class="titleIS">Inicio de Sesión </p>
+
+
+
+        <label>
+            <span>Correo</span>
+            <input required="" name="correo" placeholder="" type="email" class="input">
+        </label>
+
+        <label>
+            <span>Clave</span>
+            <input required="" name="password" placeholder="" type="password" class="input">
+        </label>
+
+        <button type="submit" class="submitIS">Iniciar sesión</button>
+
+        <div id="errorDiv" class="error-message">
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+        </div>
+    </form>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#submitBtn').click(function () {
+            var correo = $('#correo').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                url: '@Url.Action("LoginApp", "AccesoApp")',
+                type: 'POST',
+                data: { correo: correo, password: password },
+                success: function (data) {
+                    if (data.indexOf("Correo o contraseña inválidos.") === -1 && data.indexOf("Error al iniciar sesión.") === -1) {
+                        // Successful login
+                        if (data.indexOf("idEstudiante") !== -1) {
+                            // Student login
+                            sessionStorage.setItem('correoEstudiante', correo);
+                        } else if (data.indexOf("idProfesor") !== -1) {
+                            // Professor login
+                            sessionStorage.setItem('correoProfesor', correo);
+                        }
+                        window.location.href = '@Url.Action("Index", "Home")';
+                    } else {
+                        // Failed login
+                        $('#errorDiv').html('<div class="alert alert-danger" role="alert">' + data + '</div>');
+                    }
+                },
+                error: function () {
+                    $('#errorDiv').html('<div class="alert alert-danger" role="alert">Error al enviar la solicitud.</div>');
+                }
+            });
+        });
+    });
+</script>
+
