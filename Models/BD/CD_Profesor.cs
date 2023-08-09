@@ -27,41 +27,48 @@ namespace SistemaNotas.Models.BD
                 throw new Exception("No se pudo guardar en enlace de profesor  la base de datos");
             }
         }
-        public static List<Entidades.VistaNotas> CargarNotasEstudiantes()
+
+        public static List<Entidades.Estudiante_ProfesorMateria> CargarNotasEstudiante(int id)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(ConexionBD.cn))
             {
-                List<Entidades.VistaNotas> Notas = new List<Entidades.VistaNotas>();
-                string spName = "VerNotasEstudiantes";
-
-                Conexion iConexion = new Conexion();
-                DataTable dtNotas = iConexion.ExecuteSPWithDT(spName, null);
-
-                if (dtNotas != null && dtNotas.Rows.Count > 0)
+                try
                 {
-                    foreach (DataRow fila in dtNotas.Rows)
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("SistemaNotas.VerNotasEstudiantes", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<Entidades.Estudiante_ProfesorMateria> notas = new List<Entidades.Estudiante_ProfesorMateria>();
+
+                    while (reader.Read())
                     {
-                        Entidades.VistaNotas a = new Entidades.VistaNotas
+                        Entidades.Estudiante_ProfesorMateria nota = new Entidades.Estudiante_ProfesorMateria
                         {
-                            Identificador = Convert.ToInt32(fila[0]),
-                            IdMateria = Convert.ToInt32(fila[1]),
-                            NombreMateria = fila[2].ToString(),
-                            NombreProfesor = fila[3].ToString() + " " + fila[4].ToString(),
-                            NombreEstudiante = fila[5].ToString() + " " + fila[6].ToString(),
-                            Estado = fila[7].ToString(),
-                            Nota = Convert.ToDouble(fila[8].ToString())
+                            //IdEstudianteProfesorMateria = Convert.ToInt32(reader["IdEstudianteProfesorMateria"]),
+                            //IDMateria = Convert.ToInt32(reader["IdMateria"]),
+                            NombreMateria = reader["NombreMateria"].ToString(),
+                            NombreEstudiante = reader["NombreEstudiante"].ToString() + " " + reader["ApellidosEstudiante"].ToString(),
+                            Estado = reader["Estado"].ToString(),
+                            Nota = Convert.ToDouble(reader["Nota"])
                         };
 
-                        Notas.Add(a);
+                        notas.Add(nota);
                     }
+
+                    return notas;
                 }
-                return Notas;
-            }
-            catch (Exception)
-            {
-                throw new Exception("No se pudo cargar las notas de los estudiantes");
+                catch (Exception)
+                {
+                    // Handle exception appropriately
+                    throw new Exception("No se pudieron cargar las notas del estudiante.");
+                }
             }
         }
+
         public static void ModificarNotaEstudiante(int idEstudianteProfesorMateria, double notaNueva)
         {
             try

@@ -39,6 +39,7 @@ namespace SistemaNotas.Controllers
                 // Successfully logged in as a professor
                 Session["correoProfesor"] = profesor.Correo; // Store professor's email in session
                 Session["nombre"] = profesor.Nombre;
+                Session["idProfesor"] = profesor.IdProfesor;
                 return RedirectToAction("Index", "Home", new { id = profesor.IdProfesor });
             }
             else if (loginResult.ToString() == "0")

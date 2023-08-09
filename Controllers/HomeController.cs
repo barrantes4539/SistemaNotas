@@ -36,7 +36,8 @@ namespace SistemaNotas.Controllers
 
         public ActionResult VerEstudiantes()
         {
-            return View();
+            List<Estudiante_ProfesorMateria> estudiantes = CD_Profesor.CargarNotasEstudiante(Convert.ToInt32(Session["idProfesor"]));
+            return View(estudiantes);
         }
 
         public ActionResult VerMateriasEstudiantes()

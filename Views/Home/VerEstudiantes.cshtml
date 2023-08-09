@@ -1,8 +1,32 @@
-﻿
+﻿@model List<SistemaNotas.Models.Entidades.Estudiante_ProfesorMateria>
 @{
     ViewBag.Title = "VerEstudiantes";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["estudiantes"] = "Notas de estudiantes";
 }
 
-<h2>VerEstudiantes</h2>
+<div class="container">
+    <div class="row">
+        <h1>Notas del Estudiante</h1>
 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre Estudiante</th>
+                    <th>Estado</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nota in Model)
+                {
+                    <tr>
+                        <td>@nota.NombreEstudiante</td>
+                        <td>@nota.Estado</td>
+                        <td>@nota.Nota</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
