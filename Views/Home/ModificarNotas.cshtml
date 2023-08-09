@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ModificarNotas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,33 +7,67 @@
 
 <div class="container">
     <div class="row">
-            <h2>Modificar Nota</h2>
+        <h2>Modificar Nota</h2>
 
-        <form class="m-auto">
+        <form class="m-auto" id="modificar-nota-form">
             <div class="mb-3">
-                <label for="Nombre" class="form-label">Estudiante</label>
-                <input type="text" class="form-control" disabled id="Nombre" aria-describedby="Nombre del estudiante">
+                <label for="EstudianteId" class="form-label">Estudiante</label>
+                <input type="text" class="form-control" disabled id="IdEstudiante" value="@ViewBag.IdEstudiante">
             </div>
             <div class="mb-3">
                 <label for="Nota" class="form-label">Nota</label>
-                <input type="number" class="form-control" id="Nota">
+                <input type="number" class="form-control" id="Nota" value="@ViewBag.Nota" >
             </div>
 
             <div class="mb-3">
                 <label for="estado" class="form-label">Estado</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Estado...</option>
-                    <option value="1">Aprobado</option>
-                    <option value="2">En curso</option>
-                    <option value="3">Reprobado</option>
+                <select class="form-select" id="estado" aria-label="Default select example" >
+                    <option selected>@ViewBag.Estado</option>
+                    <option value="Aprobado" >Aprobado</option>
+                    <option value="En curso">En curso</option>
+                    <option value="Reprobado">Reprobado</option>
                 </select>
             </div>
-            
-            <button type="submit" class="btn btn-primary">Confirmar</button>
-        </form>
 
+            <button type="submit" class="btn btn-primary" id="confirmar-modificacion" style="display: none;">Confirmar</button>
+        </form>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Nota, #estado").click(function () {
+            $(this).prop("disabled", false);
+            $("#confirmar-modificacion").show();
+        });
 
+        $("#modificar-nota-form").submit(function (e) {
+            e.preventDefault(); // Evitar la acción de envío por defecto
+            var estudianteId = $("#IdEstudiante").val();
+            var nuevaNota = $("#Nota").val();
+            var nuevoEstado = $("#estado").val();
 
+            $.ajax({
+                url: '@Url.Action("ProcesarModificarNotas", "Home")',
+                type: 'POST',
+                data: {
+                    idEstudiante: estudianteId,
+                    nota: nuevaNota,
+                    estado: nuevoEstado
+                },
+                success: function (response) {
+                    // Manejar la respuesta, por ejemplo, mostrar un mensaje de éxito o error
+                    if (response.success) {
+                        alert("Notas modificadas exitosamente.");
+                    } else {
+                        alert("Notas modificadas exitosamente.");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

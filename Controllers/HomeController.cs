@@ -39,7 +39,8 @@ namespace SistemaNotas.Controllers
         {
             if (Session["correoEstudiante"] != null)
             {
-                return View();
+                List<VistaNotas> notas = CD_Estudiante.CargarNotasEstudiante(Convert.ToInt32(Session["idEstudiante"]));
+                return View(notas); // Pasar el modelo a la vista
             }
             else
             {
@@ -65,10 +66,19 @@ namespace SistemaNotas.Controllers
         {
             return View();
         }
-        public ActionResult ModificarNotas()
+        public ActionResult ModificarNotas(int? idEstudiante)
         {
             if (Session["correoProfesor"] != null)
             {
+                if (idEstudiante.HasValue)
+                {
+                    Estudiante_ProfesorMateria estudiante = CD_Profesor.ObtenerEstudiantePorId(idEstudiante.Value);
+
+                    ViewBag.IdEstudiante = estudiante.IdEstudiante;
+                    ViewBag.Nota = estudiante.Nota;
+                    ViewBag.Estado = estudiante.Estado;
+                }
+
                 return View();
             }
             else
@@ -77,6 +87,71 @@ namespace SistemaNotas.Controllers
             }
         }
 
- 
+        [HttpGet]
+        public JsonResult CargarDatosEstudiante(int id)
+        {
+            Estudiante_ProfesorMateria estudiante = CD_Profesor.ObtenerEstudiantePorId(id); // Reemplaza esto con tu método real
+            var data = new
+            {
+                IdEstudiante = estudiante.IdEstudiante,
+                Estado = estudiante.Estado,
+                Nota = estudiante.Nota
+                // Otros campos del estudiante que necesitas
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ObtenerEstudiantePorId(int id)
+        {
+            try
+            {
+                Estudiante_ProfesorMateria estudiante = CD_Profesor.ObtenerEstudiantePorId(id);
+                if (estudiante != null)
+                {
+                    return Json(estudiante, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { error = "Estudiante no encontrado" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ProcesarModificarNotas(int idEstudiante, string estado, double nota)
+        {
+            if (Session["correoProfesor"] != null)
+            {
+                bool modificacionExitosa = CD_Profesor.ModificarNotasEstudiante(idEstudiante, estado, nota);
+
+                if (modificacionExitosa)
+                {
+                    TempData["SuccessMessage"] = "Notas del estudiante modificadas exitosamente.";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "No se pudieron modificar las notas del estudiante.";
+                }
+
+                return RedirectToAction("VerEstudiantes"); // Redirigir a la página de ver estudiantes o a donde desees
+            }
+            else
+            {
+                return RedirectToAction("LoginApp", "AccesoApp");
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 }
