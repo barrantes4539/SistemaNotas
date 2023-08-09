@@ -31,7 +31,7 @@ namespace SistemaNotas.Models.BD
                     {
                         reader.Read(); // Assuming there's only one matching record
 
-                        if (reader.FieldCount > 1) // If more than 1 field, it's a professor
+                        if (Convert.ToInt32(reader["idRol"]) == 1) // If more than 1 field, it's a professor
                         {
                             Profesores profesor = new Profesores
                             {
